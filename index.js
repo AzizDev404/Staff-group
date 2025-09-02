@@ -4,6 +4,10 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/user.routes');
 const adminRoutes = require('./routes/admin.routes');
+const cors = require('cors');
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Load environment variables from .env file
 dotenv.config();
