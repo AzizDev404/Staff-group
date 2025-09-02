@@ -4,7 +4,7 @@ const { createOneTimeInviteLink, sendMessage } = require('../utils/telegram');
 // Create and Save a new User
 exports.create = async (req, res) => {
     // Validate request
-    if(!req.body.full_name || !req.body.phone_number || !req.body.nickname || !req.body.direction) {
+    if( !req.body.telegram_id || !req.body.full_name || !req.body.phone_number || !req.body.nickname || !req.body.direction) {
         return res.status(400).send({
             message: "Content can not be empty"
         });
@@ -12,6 +12,7 @@ exports.create = async (req, res) => {
 
     // Create a User
     const user = new User({
+        telegram_id: req.body.telegram_id,
         full_name: req.body.full_name,
         phone_number: req.body.phone_number,
         nickname: req.body.nickname,
@@ -69,7 +70,7 @@ exports.findOne = async (req, res) => {
 // Update a User identified by the userId in the request
 exports.update = async (req, res) => {
     // Validate Request
-    if(!req.body.full_name || !req.body.phone_number || !req.body.nickname || !req.body.direction) {
+    if( !req.body.telegram_id || !req.body.full_name || !req.body.phone_number || !req.body.nickname || !req.body.direction) {
         return res.status(400).send({
             message: "Content can not be empty"
         });
@@ -79,6 +80,7 @@ exports.update = async (req, res) => {
 
     try {
         const data = await User.findByIdAndUpdate(id, {
+            telegram_id: req.body.telegram_id,
             full_name: req.body.full_name,
             phone_number: req.body.phone_number,
             nickname: req.body.nickname,
